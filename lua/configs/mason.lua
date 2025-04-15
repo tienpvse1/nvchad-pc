@@ -16,10 +16,10 @@ M.config = {
     "js-debug-adapter",
 
     -- golang
-    "gopls",
-    "gotests",
-    "goimports",
-    "gomodifytags",
+    -- "gopls",
+    -- "gotests",
+    -- "goimports",
+    -- "gomodifytags",
 
   },
 }

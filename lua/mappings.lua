@@ -20,10 +20,25 @@ map("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_wor
 
 -- nvim-dap
 map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
-map("n", "<leader>dr", "<cmd> DapContinue <CR>", {
+map("n", "<F5>", "<cmd> DapContinue <CR>", {
   desc = "Run or continue the debugger",
 })
 
+map("n", "<F10>", "<cmd> DapStepOver <CR>", {
+  desc = "Dap Step Over",
+})
+
+map("n", "<F11>", "<cmd> DapStepInto <CR>", {
+  desc = "Run or continue the debugger",
+})
+
+map("n", "<S-F11>", "<cmd> DapStepOut <CR>", {
+  desc = "Run or continue the debugger",
+})
+
+map("n", "<S-F5>", "<cmd> DapTerminate <CR>", {
+  desc = "Run or continue the debugger",
+})
 -- normal mode
 map({ "n", "i" }, "<C-Z>", "<C-O>u")
 map({ "n", "i" }, "<S-A-o>", "<ESC><cmd>TSToolsOrganizeImports<CR>")
