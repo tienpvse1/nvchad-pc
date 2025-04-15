@@ -4,6 +4,16 @@ local cmp = require "cmp"
 
 local map = vim.keymap.set
 
+-- window resizing
+map("n", "<C-Up>", ":resize +2<CR>", { desc = "increase height" })
+map("n", "<C-Down>", ":resize -2<CR>", { desc = "decrease height" })
+map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "increase width" })
+map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "increase width" })
+
+-- gitsigns
+map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Toggle blame line" })
+map("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", { desc = "Open Blame" })
+
 -- nvim-spectre
 map("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
   desc = "Toggle Spectre",
@@ -23,24 +33,21 @@ map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint 
 map("n", "<F5>", "<cmd> DapContinue <CR>", {
   desc = "Run or continue the debugger",
 })
-
 map("n", "<F10>", "<cmd> DapStepOver <CR>", {
   desc = "Dap Step Over",
 })
-
 map("n", "<F11>", "<cmd> DapStepInto <CR>", {
   desc = "Run or continue the debugger",
 })
-
 map("n", "<S-F11>", "<cmd> DapStepOut <CR>", {
   desc = "Run or continue the debugger",
 })
-
 map("n", "<S-F5>", function()
   require("dap").terminate { all = "true" }
 end, {
   desc = "Run or continue the debugger",
 })
+
 -- normal mode
 map({ "n", "i" }, "<C-Z>", "<C-O>u")
 map({ "n", "i" }, "<S-A-o>", "<ESC><cmd>TSToolsOrganizeImports<CR>")
@@ -95,28 +102,15 @@ end)
 -- override telescope live grep with live grep args
 map("n", "<leader>fw", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
--- insert mode
+-- nvim-cmp
 map("i", "<C-o>", function()
   cmp.mapping.complete()
 end)
 
 map("i", "jj", "<ESC>")
--- visual mode
-map("v", "<C-/>", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>")
-
--- terminal mode
-
--- command mode
 
 -- special config for neovide
 map("n", "<C-s>", ":w<CR>") -- Save
-map("v", "<C-c>", '"+y') -- Copy
-map("n", "<C-v>", '"+P') -- Paste normal mode
-map("v", "<C-v>", '"+P') -- Paste visual mode
-map("c", "<C-v>", "<C-R>+") -- Paste command mode
-map("c", "<C-S-v>", "<C-R>+") -- Paste command mode
-map("i", "<C-v>", '<ESC>l"+Pli') -- Paste insert mode
-map("t", "<C-S-v>", '<C-\\><C-n>"*pa') -- Paste command mode
 
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
