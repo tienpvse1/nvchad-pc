@@ -36,7 +36,9 @@ map("n", "<S-F11>", "<cmd> DapStepOut <CR>", {
   desc = "Run or continue the debugger",
 })
 
-map("n", "<S-F5>", "<cmd> DapTerminate <CR>", {
+map("n", "<S-F5>", function()
+  require("dap").terminate { all = "true" }
+end, {
   desc = "Run or continue the debugger",
 })
 -- normal mode

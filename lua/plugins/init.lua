@@ -2,8 +2,7 @@ return {
   { "nvim-pack/nvim-spectre" },
   {
     "microsoft/vscode-js-debug",
-    opt = true,
-    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+    build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
   },
   {
     "nvzone/typr",
@@ -45,22 +44,7 @@ return {
     },
     lazy = false,
     config = function()
-      require("nvim-treesitter.configs").setup {
-        textobjects = {
-          select = {
-            enable = true,
-            keymaps = {
-
-              -- Built-in captures.
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-            },
-          },
-        },
-      }
+      require "configs.text-object"
     end,
   },
   {
@@ -85,7 +69,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
-
       "nvim-telescope/telescope.nvim",
     },
     config = {

@@ -30,17 +30,11 @@ for _, language in ipairs { "typescript", "javascript" } do
   dap.configurations[language] = {
     {
       type = "pwa-node",
-      request = "launch",
-      name = "Launch file",
-      program = "${file}",
-      cwd = "${workspaceFolder}",
-    },
-    {
-      type = "pwa-node",
       request = "attach",
       name = "Attach",
       processId = require("dap.utils").pick_process,
       cwd = "${workspaceFolder}",
+      skilpFiles = { "<node_internals>/**" },
     },
     {
       type = "pwa-node",
@@ -53,7 +47,7 @@ for _, language in ipairs { "typescript", "javascript" } do
       sourceMaps = true,
       protocol = "inspector",
       outFiles = { "${workspaceFolder}/**/**/*", "!**/node_modules/**" },
-      skipFiles = { "<node_internals>/**", "node_modules/**" },
+      skilpFiles = { "<node_internals>/**" },
       resolveSourceMapLocations = {
         "${workspaceFolder}/**",
         "!**/node_modules/**",
@@ -62,14 +56,14 @@ for _, language in ipairs { "typescript", "javascript" } do
     {
       type = "pwa-node",
       request = "launch",
-      name = "Launch Svelte server",
+      name = "Launch Svelte server \n",
       cwd = "${workspaceFolder}",
       runtimeArgs = { "dev" },
       runtimeExecutable = "pnpm",
       protocol = "inspector",
       console = "integratedTerminal",
       sourceMaps = true,
-      skipFiles = { "<node_internals>/**", "node_modules/**" },
+      skilpFiles = { "<node_internals>/**" },
     },
   }
 end
@@ -91,12 +85,7 @@ for _, lang in ipairs { "javascriptreact", "typescriptreact", "svelte" } do
       protocol = "inspector",
       port = 9222,
       webRoot = "${workspaceFolder}",
-      skipFiles = {
-        "<node_internals>/**",
-        "node_modules/**",
-        "${workspaceRoot}/node_modules/**/*.js",
-        "<node_internals>/**/*.js",
-      },
+      skilpFiles = { "<node_internals>/**" },
     },
     {
       type = "pwa-chrome",
@@ -105,11 +94,7 @@ for _, lang in ipairs { "javascriptreact", "typescriptreact", "svelte" } do
       url = getUrl,
       webRoot = "${workspaceFolder}",
       cwd = "${workspaceFolder}",
-      skipFiles = {
-        "<node_internals>/**/*.js",
-        "<node_modules>/**/*.js",
-        "${workspaceRoot}/node_modules/**/*.js",
-      },
+      skilpFiles = { "<node_internals>/**" },
       sourceMaps = true,
       ["debug.javascript.terminalOptions"] = {
         ["skipFiles"] = { "<node_internals>/**" },
