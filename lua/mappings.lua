@@ -5,17 +5,23 @@ local cmp = require "cmp"
 local map = vim.keymap.set
 
 -- nvim-spectre
-map('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-    desc = "Toggle Spectre"
+map("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
+  desc = "Toggle Spectre",
 })
-map('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
-    desc = "Search current word"
+map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+  desc = "Search current word",
 })
-map('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
-    desc = "Search current word"
+map("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+  desc = "Search current word",
 })
-map('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
-    desc = "Search on current file"
+map("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+  desc = "Search on current file",
+})
+
+-- nvim-dap
+map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
+map("n", "<leader>dr", "<cmd> DapContinue <CR>", {
+  desc = "Run or continue the debugger",
 })
 
 -- normal mode
@@ -61,7 +67,6 @@ end, { desc = "Terminal Toggle Floating term" })
 map("n", "<leader><leader>m", function()
   require("treesj").toggle()
 end)
-map("n", "<leader>db", "<cmd>DBUIToggle<CR>")
 map("n", "<leader>fm", function()
   if vim.bo.filetype == "rust" then
     vim.lsp.buf.format()
@@ -87,13 +92,13 @@ map("v", "<C-/>", "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.v
 -- command mode
 
 -- special config for neovide
-map("n", "<C-s>", ":w<CR>")            -- Save
-map("v", "<C-c>", '"+y')               -- Copy
-map("n", "<C-v>", '"+P')               -- Paste normal mode
-map("v", "<C-v>", '"+P')               -- Paste visual mode
-map("c", "<C-v>", "<C-R>+")            -- Paste command mode
-map("c", "<C-S-v>", "<C-R>+")          -- Paste command mode
-map("i", "<C-v>", '<ESC>l"+Pli')       -- Paste insert mode
+map("n", "<C-s>", ":w<CR>") -- Save
+map("v", "<C-c>", '"+y') -- Copy
+map("n", "<C-v>", '"+P') -- Paste normal mode
+map("v", "<C-v>", '"+P') -- Paste visual mode
+map("c", "<C-v>", "<C-R>+") -- Paste command mode
+map("c", "<C-S-v>", "<C-R>+") -- Paste command mode
+map("i", "<C-v>", '<ESC>l"+Pli') -- Paste insert mode
 map("t", "<C-S-v>", '<C-\\><C-n>"*pa') -- Paste command mode
 
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })

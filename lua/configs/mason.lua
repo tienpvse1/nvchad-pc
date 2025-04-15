@@ -20,6 +20,7 @@ M.config = {
     "gotests",
     "goimports",
     "gomodifytags",
+
   },
 }
 

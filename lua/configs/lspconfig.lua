@@ -5,7 +5,7 @@ local capabilities = require("nvchad.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
 local servers =
-{"typescript-tools", "html", "rust_analyzer", "gopls", "cssls", "clangd", "tailwindcss", "docker_compose_language_service", "dockerls"}
+  { "html", "rust_analyzer", "gopls", "cssls", "clangd", "tailwindcss", "docker_compose_language_service", "dockerls" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -13,7 +13,6 @@ for _, lsp in ipairs(servers) do
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
-
   }
 end
 
@@ -29,8 +28,7 @@ lspconfig.svelte.setup {
   end,
   on_init = on_init,
   capabilities = capabilities,
-  commands = {
-  },
+  commands = {},
 }
 
 require("lspconfig").yamlls.setup {

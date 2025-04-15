@@ -1,5 +1,46 @@
 return {
-  {'nvim-pack/nvim-spectre'},
+  { "nvim-pack/nvim-spectre" },
+  {
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out",
+  },
+
+  {
+    "rcarriga/nvim-dap-ui",
+    event = "VeryLazy",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+      "mxsdev/nvim-dap-vscode-js",
+    },
+    config = function()
+      local dap = require "dap"
+
+      require("dap-vscode-js").setup {
+
+        debugger_path = "/home/tienpvse/.local/share/nvim/lazy/vscode-js-debug",
+      }
+
+      require "configs.daps"
+      local dapui = require "dapui"
+
+      require("dapui").setup()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap",
+    config = function() end,
+  },
   {
     "rmagatti/auto-session",
     dependencies = {
@@ -46,7 +87,7 @@ return {
             -- mapping query_strings to modes.
             selection_modes = {
               ["@parameter.outer"] = "v", -- charwise
-              ["@function.outer"] = "V",  -- linewise
+              ["@function.outer"] = "V", -- linewise
               ["@class.outer"] = "<c-v>", -- blockwise
             },
             -- If you set this to `true` (default is `false`) then any textobject is
@@ -97,27 +138,28 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      require("typescript-tools").setup {}
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
     dependencies = {
       {
-  'pmizio/typescript-tools.nvim',
-                dependencies = 'nvim-lua/plenary.nvim',
-                opts = {
-                    settings = {
-                        tsserver_file_preferences = {
-                            includeInlayParameterNameHints = 'all',
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayVariableTypeHints = true,
-                            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                        },
-                    },
-                },
-      }
-    }
+        "pmizio/typescript-tools.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
+        opts = {
+          settings = {
+            tsserver_file_preferences = {
+              includeInlayParameterNameHints = "all",
+              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+              includeInlayFunctionParameterTypeHints = true,
+              includeInlayVariableTypeHints = true,
+              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+              includeInlayFunctionLikeReturnTypeHints = true,
+            },
+          },
+        },
+      },
+    },
   },
   {
     "zbirenbaum/copilot.lua",
@@ -129,7 +171,7 @@ return {
     branch = "canary",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     opts = {
       debug = true, -- Enable debugging
@@ -182,7 +224,7 @@ return {
   {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = {
-      { "tpope/vim-dadbod",                     lazy = true },
+      { "tpope/vim-dadbod", lazy = true },
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
     },
     cmd = {
@@ -212,8 +254,8 @@ return {
     "windwp/nvim-ts-autotag",
     event = "BufReadPre",
     opts = {
-      enable_close = true,           -- Auto close tags
-      enable_rename = true,          -- Auto rename pairs of tags
+      enable_close = true, -- Auto close tags
+      enable_rename = true, -- Auto rename pairs of tags
       enable_close_on_slash = false, -- Auto close on trailing </
     },
   },
