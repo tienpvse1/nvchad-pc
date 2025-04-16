@@ -14,6 +14,7 @@ M.config = {
     "svelte-language-server",
     "json-lsp",
     "js-debug-adapter",
+    "graphql-language-service-cli"
 
     -- golang
     -- "gopls",
