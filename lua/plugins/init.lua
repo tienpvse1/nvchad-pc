@@ -1,4 +1,9 @@
 return {
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
+  },
   { "nvim-pack/nvim-spectre" },
   {
     "microsoft/vscode-js-debug",

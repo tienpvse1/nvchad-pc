@@ -44,6 +44,7 @@
   "presence.nvim": { "branch": "main", "commit": "87c857a56b7703f976d3a5ef15967d80508df6e6" },
   "telescope-live-grep-args.nvim": { "branch": "master", "commit": "8ad632f793fd437865f99af5684f78300dac93fb" },
   "telescope.nvim": { "branch": "master", "commit": "a4ed82509cecc56df1c7138920a1aeaf246c0ac5" },
+  "todo-comments.nvim": { "branch": "main", "commit": "304a8d204ee787d2544d8bc23cd38d2f929e7cc5" },
   "treesj": { "branch": "main", "commit": "f4049f8ba2177e7c5c03fb9e34d4e039c685d744" },
   "typescript-tools.nvim": { "branch": "master", "commit": "a4109c70e7d6a3a86f971cefea04ab6720582ba9" },
   "typr": { "branch": "main", "commit": "db0f98fdb4c7b7263f4548ac8289fe8e26f0a0c9" },
