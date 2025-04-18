@@ -11,8 +11,11 @@ map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "increase width" })
 map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "increase width" })
 
 -- gitsigns
-map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Toggle blame line" })
-map("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", { desc = "Open Blame" })
+map("n", "<leader>gb", require("gitsigns").toggle_current_line_blame, { desc = "Toggle blame line" })
+map("n", "<leader>gB", require("gitsigns").blame, { desc = "Open Blame" })
+-- git diff
+map("n", "<leader>gc", "<cmd>set hidden<cr><cmd>DiffviewClose<cr><cmd>set nohidden<cr>")
+map("n", "<leader>go", "<cmd>set hidden<cr><cmd>DiffviewOpen<cr><cmd>set nohidden<cr>")
 
 -- nvim-spectre
 map("n", "<leader>S", require("spectre").toggle, {
@@ -33,17 +36,17 @@ end, {
 })
 
 -- nvim-dap
-map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
-map("n", "<F5>", "<cmd> DapContinue <CR>", {
+map("n", "<leader>db", require("dap").toggle_breakpoint, { desc = "Add breakpoint at line" })
+map("n", "<F5>", require("dap").continue, {
   desc = "Run or continue the debugger",
 })
-map("n", "<F10>", "<cmd> DapStepOver <CR>", {
+map("n", "<F10>", require("dap").step_over, {
   desc = "Dap Step Over",
 })
-map("n", "<F11>", "<cmd> DapStepInto <CR>", {
-  desc = "Run or continue the debugger",
+map("n", "<F11>", require("dap").step_into, {
+  desc = "Dap Step Into",
 })
-map("n", "<S-F11>", "<cmd> DapStepOut <CR>", {
+map("n", "<S-F11>", require("dap").step_out, {
   desc = "Run or continue the debugger",
 })
 map("n", "<S-F5>", function()
@@ -53,17 +56,19 @@ end, {
 })
 
 -- normal mode
-map({ "n", "i" }, "<C-Z>", "<C-O>u")
 map({ "n", "i" }, "<S-A-o>", "<ESC><cmd>TSToolsOrganizeImports<CR>")
 map({ "n", "i" }, "<S-A-r>", "<ESC><cmd>TSToolsRemoveUnused<CR>")
 map("n", "<leader>i", vim.diagnostic.open_float)
-map("n", "<leader>gc", "<cmd>set hidden<cr><cmd>DiffviewClose<cr><cmd>set nohidden<cr>")
-map("n", "<leader>go", "<cmd>set hidden<cr><cmd>DiffviewOpen<cr><cmd>set nohidden<cr>")
-map("n", "<leader>i", vim.diagnostic.open_float)
 
+-- telescope
 map("n", "<leader>gr", require("telescope.builtin").lsp_references, { noremap = true, silent = true })
-
 map("n", "<leader>gd", require("telescope.builtin").lsp_definitions, { noremap = true, silent = true })
+map("n", "<leader>fw", require("telescope").extensions.live_grep_args.live_grep_args)
+map("n", "<leader>fc", function()
+  require("telescope.builtin").find_files {
+    cwd = vim.fn.stdpath "config",
+  }
+end)
 
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle {
@@ -80,21 +85,13 @@ map({ "n", "t" }, "<A-i>", function()
   }
 end, { desc = "Terminal Toggle Floating term" })
 
-map("n", "<leader><leader>m", require("treesj").toggle)
+map("n", "<leader><leader>m", require("treesj").toggle, { desc = "Toggle split/join" })
 map("n", "<leader>fm", function()
   if vim.bo.filetype == "rust" then
     vim.lsp.buf.format()
   else
     require("conform").format()
   end
-end)
-
--- override telescope live grep with live grep args
-map("n", "<leader>fw", require("telescope").extensions.live_grep_args.live_grep_args)
-map("n", "<leader>fc", function()
-  require("telescope.builtin").find_files {
-    cwd = vim.fn.stdpath "config",
-  }
 end)
 
 -- nvim-cmp
