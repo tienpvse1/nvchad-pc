@@ -1,0 +1,33 @@
+{
+  "Typescript Next Layout": {
+    "prefix": "layout",
+    "body": [
+      "type LayoutProps = {",
+      "\tchildren: React.ReactNode",
+      "}",
+      "",
+      "export default function Layout({ children }: LayoutProps){",
+      "",
+      "\treturn(",
+      "\t\t{children}",
+      "\t)",
+      "}"
+    ]
+  },
+
+  "Typescript Next Page": {
+    "prefix": "page",
+    "body": [
+      "type Props = {",
+      "\tparams: Promise<{$1}>",
+      "\tsearchParams: Promise<{$2}>",
+      "}",
+      "",
+      "export default async function Page({ params, searchParams }: Props){",
+      "",
+      "\treturn(",
+      "\t)",
+      "}"
+    ]
+  }
+}
