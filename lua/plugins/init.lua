@@ -1,4 +1,9 @@
 return {
+
+  {
+    "nvim-tree/nvim-web-devicons",
+    opts = require("configs.devicons").conf,
+  },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
