@@ -15,16 +15,20 @@ map("n", "<leader>gb", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "
 map("n", "<leader>gB", "<cmd>Gitsigns blame<CR>", { desc = "Open Blame" })
 
 -- nvim-spectre
-map("n", "<leader>S", '<cmd>lua require("spectre").toggle()<CR>', {
+map("n", "<leader>S", require("spectre").toggle, {
   desc = "Toggle Spectre",
 })
-map("n", "<leader>sw", '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+map("n", "<leader>sw", function()
+  require("spectre").open_visual { select_word = true }
+end, {
   desc = "Search current word",
 })
-map("v", "<leader>sw", '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+map("v", "<leader>sw", require("spectre").open_visual, {
   desc = "Search current word",
 })
-map("n", "<leader>sp", '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+map("n", "<leader>sp", function()
+  require("spectre").open_file_search { select_word = true }
+end, {
   desc = "Search on current file",
 })
 
@@ -52,26 +56,14 @@ end, {
 map({ "n", "i" }, "<C-Z>", "<C-O>u")
 map({ "n", "i" }, "<S-A-o>", "<ESC><cmd>TSToolsOrganizeImports<CR>")
 map({ "n", "i" }, "<S-A-r>", "<ESC><cmd>TSToolsRemoveUnused<CR>")
-map("n", "<leader>i", function()
-  vim.diagnostic.open_float()
-end)
+map("n", "<leader>i", vim.diagnostic.open_float)
 map("n", "<leader>gc", "<cmd>set hidden<cr><cmd>DiffviewClose<cr><cmd>set nohidden<cr>")
 map("n", "<leader>go", "<cmd>set hidden<cr><cmd>DiffviewOpen<cr><cmd>set nohidden<cr>")
-map("n", "<leader>i", function()
-  vim.diagnostic.open_float()
-end)
+map("n", "<leader>i", vim.diagnostic.open_float)
 
-map("n", "<C-/>", function()
-  require("Comment.api").toggle.linewise.current()
-end)
+map("n", "<leader>gr", require("telescope.builtin").lsp_references, { noremap = true, silent = true })
 
-map("n", "<leader>gr", function()
-  require("telescope.builtin").lsp_references()
-end, { noremap = true, silent = true })
-
-map("n", "<leader>gd", function()
-  require("telescope.builtin").lsp_definitions()
-end, { noremap = true, silent = true })
+map("n", "<leader>gd", require("telescope.builtin").lsp_definitions, { noremap = true, silent = true })
 
 map({ "n", "t" }, "<A-i>", function()
   require("nvchad.term").toggle {
@@ -88,9 +80,7 @@ map({ "n", "t" }, "<A-i>", function()
   }
 end, { desc = "Terminal Toggle Floating term" })
 
-map("n", "<leader><leader>m", function()
-  require("treesj").toggle()
-end)
+map("n", "<leader><leader>m", require("treesj").toggle)
 map("n", "<leader>fm", function()
   if vim.bo.filetype == "rust" then
     vim.lsp.buf.format()
@@ -100,12 +90,15 @@ map("n", "<leader>fm", function()
 end)
 
 -- override telescope live grep with live grep args
-map("n", "<leader>fw", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+map("n", "<leader>fw", require("telescope").extensions.live_grep_args.live_grep_args)
+map("n", "<leader>fc", function()
+  require("telescope.builtin").find_files {
+    cwd = vim.fn.stdpath "config",
+  }
+end)
 
 -- nvim-cmp
-map("i", "<C-o>", function()
-  cmp.mapping.complete()
-end)
+map("i", "<C-o>", cmp.mapping.complete)
 
 map("i", "jj", "<ESC>")
 
