@@ -60,6 +60,7 @@ return {
         version = "^1.0.0",
       },
     },
+    opts = require("configs.telescope").conf,
   },
   {
     "stevearc/conform.nvim",

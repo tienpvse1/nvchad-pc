@@ -64,6 +64,7 @@ map("n", "<leader>i", vim.diagnostic.open_float)
 map("n", "<leader>gr", require("telescope.builtin").lsp_references, { noremap = true, silent = true })
 map("n", "<leader>gd", require("telescope.builtin").lsp_definitions, { noremap = true, silent = true })
 map("n", "<leader>fw", require("telescope").extensions.live_grep_args.live_grep_args)
+
 map("n", "<leader>fc", function()
   require("telescope.builtin").find_files {
     cwd = vim.fn.stdpath "config",
