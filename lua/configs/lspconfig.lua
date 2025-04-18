@@ -77,6 +77,11 @@ require("lspconfig").jsonls.setup {
           url = "https://json.schemastore.org/package.json",
         },
         {
+          fileMatch = { ".graphqlrc", ".graphqlrc.json" },
+          url = "https://unpkg.com/graphql-config@5.1.4/config-schema.json",
+        },
+
+        {
           fileMatch = { "tsconfig*.json" },
           url = "https://json.schemastore.org/tsconfig.json",
         },

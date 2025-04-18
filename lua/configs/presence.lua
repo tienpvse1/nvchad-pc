@@ -2,7 +2,7 @@ local M = {}
 
 M.config = {
   auto_update = true,
-  neovim_image_text = "The One True Text Editor",
+  neovim_image_text = "The Gigachad Text Editor🗿",
   main_image = "file",
   enable_line_number = true,
   blacklist = {},
@@ -16,7 +16,7 @@ M.config = {
     if string.find(filename, ".lua") then
       return "🛠 Đang config Neovim"
     else
-      return "💻 Code file " .. filename .. " ẻ chảy"
+      return "💻 Đang code file " .. filename .. " sml"
     end
   end,
   file_explorer_text = "🔭 Soi project bằng Telescope",
@@ -29,7 +29,7 @@ M.config = {
       return "👀 Ngó file %s"
     end
   end,
-  workspace_text = "Svelte 🐐",
+  workspace_text = "Đang ở trong môi trường tự nhiên 🐐",
   line_number_text = "Dòng %s/%s",
 }
 

@@ -82,7 +82,7 @@ return {
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    config = {
+    opts = {
       mappings = require("configs.neogit_config").mappings,
       use_default_keymaps = require("configs.neogit_config").use_default_keymaps,
     },
@@ -193,7 +193,7 @@ return {
   {
     "andweeb/presence.nvim",
     event = "BufEnter",
-    config = require("configs.presence").config,
+    opts = require("configs.presence").config,
   },
 
   {
