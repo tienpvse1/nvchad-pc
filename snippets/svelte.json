@@ -1,0 +1,30 @@
+{
+  "Page": {
+    "prefix": ["svpage"],
+    "body": [
+      "<script lang=\"ts\">",
+      "",
+      "\tlet {data} = $$props()",
+      "</script>",
+      "<div>",
+      "",
+      "</div>"
+    ],
+    "description": "Sveltekit page"
+  },
+
+  "Layout": {
+    "prefix": ["svlayout"],
+    "body": [
+      "<script lang=\"ts\">",
+      "",
+      "\tlet {children} = $$props()",
+      "",
+      "</script>",
+      "<div>",
+      "\t{@render children()}",
+      "</div>"
+    ],
+    "description": "Sveltekit page"
+  }
+}

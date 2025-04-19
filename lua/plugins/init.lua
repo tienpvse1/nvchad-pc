@@ -65,7 +65,7 @@ return {
         version = "^1.0.0",
       },
     },
-    opts = require("configs.telescope").conf,
+    opts = require("configs.telescope_config").conf,
   },
   {
     "stevearc/conform.nvim",
@@ -98,6 +98,7 @@ return {
       {
         "pmizio/typescript-tools.nvim",
         dependencies = "nvim-lua/plenary.nvim",
+
         opts = {
           settings = {
             tsserver_file_preferences = {
@@ -114,40 +115,8 @@ return {
     },
   },
   {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = require "configs.copilot",
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-    },
-    opts = {
-      debug = true, -- Enable debugging
-    },
-    config = function(opts)
-      require("CopilotChat").setup(opts)
-    end,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = require("configs.copilot_cmp_config").config,
-  },
-  {
     "hrsh7th/nvim-cmp",
     opts = require "configs.cmp_config",
-    dependencies = {
-      {
-        "zbirenbaum/copilot-cmp",
-        config = function()
-          require("copilot_cmp").setup()
-        end,
-      },
-    },
   },
   {
     "williamboman/mason.nvim",
@@ -171,23 +140,6 @@ return {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     opts = {},
-  },
-
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    dependencies = {
-      { "tpope/vim-dadbod", lazy = true },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
-    },
-    cmd = {
-      "DBUI",
-      "DBUIToggle",
-      "DBUIAddConnection",
-      "DBUIFindBuffer",
-    },
-    init = function()
-      vim.g.db_ui_use_nerd_fonts = 1
-    end,
   },
 
   {

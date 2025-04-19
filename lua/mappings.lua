@@ -1,6 +1,5 @@
 require "nvchad.mappings"
 local cmp = require "cmp"
--- add yours herecopilot
 
 local map = vim.keymap.set
 

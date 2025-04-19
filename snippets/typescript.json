@@ -1,0 +1,19 @@
+{
+  "Sveltekit load function": {
+    "prefix": ["svload"],
+    "body": ["export async function load(event){", "\t", "\treturn {}", "}"],
+    "description": "Sveltekit load function"
+  },
+
+  "Sveltekit actions": {
+    "prefix": ["svactions"],
+    "body": [
+      "export const actions = {",
+      "\t${1:actionName}(event){",
+      "\t\t",
+      "\t}",
+      "}"
+    ],
+    "description": "Sveltekit load function"
+  }
+}

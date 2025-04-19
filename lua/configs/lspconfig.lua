@@ -8,13 +8,12 @@ local servers = {
   "html",
   "graphql",
   "emmet_ls",
-  "rust_analyzer",
   "gopls",
   "cssls",
-  "clangd",
   "tailwindcss",
   "docker_compose_language_service",
   "dockerls",
+  "svelte",
 }
 
 -- lsps with default config
@@ -25,21 +24,6 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
-
-lspconfig.svelte.setup {
-  on_attach = function(client)
-    vim.api.nvim_create_autocmd("BufWritePost", {
-      pattern = { "*.js", "*.ts" },
-      callback = function(ctx)
-        -- Here use ctx.match instead of ctx.file
-        client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-      end,
-    })
-  end,
-  on_init = on_init,
-  capabilities = capabilities,
-  commands = {},
-}
 
 require("lspconfig").yamlls.setup {
   on_init = on_init,

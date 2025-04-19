@@ -3,6 +3,8 @@ local M = {}
 M.config = {
   ensure_installed = {
     "lua",
+    "tsx",
+    "graphql",
     "html",
     "css",
     "javascript",
