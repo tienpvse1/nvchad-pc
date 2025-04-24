@@ -1,6 +1,11 @@
 local M = {}
 
 local function telescope_conf(_, conf)
+  conf.extensions["ui-select"] = {
+    require("telescope.themes").get_dropdown {},
+  }
+  require("telescope").load_extension "ui-select"
+
   conf.pickers = {
     buffers = {
       show_all_buffers = true,

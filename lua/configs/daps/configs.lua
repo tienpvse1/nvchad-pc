@@ -1,11 +1,12 @@
 local dap = require "dap"
-local dapui = require "dapui"
-require("dapui").setup()
+local dv = require "dap-view"
+dap.listeners.before.attach["dap-view-config"] = dv.open
+dap.listeners.before.launch["dap-view-config"] = dv.open
+
+dap.listeners.before.event_terminated["dap-view-config"] = dv.close
+dap.listeners.before.event_exited["dap-view-config"] = dv.close
+
 require("dap-vscode-js").setup {
   debugger_path = "/home/tienpvse/.local/share/nvim/lazy/vscode-js-debug",
 }
 require "configs.daps"
-
-dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-dap.listeners.before.event_exited["dapui_config"] = dapui.close

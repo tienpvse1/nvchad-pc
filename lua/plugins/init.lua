@@ -11,29 +11,20 @@ return {
   },
   { "nvim-pack/nvim-spectre" },
   {
-    "microsoft/vscode-js-debug",
-    build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
-  },
-  {
     "nvzone/typr",
     dependencies = "nvzone/volt",
     opts = {},
     cmd = { "Typr", "TyprStats" },
   },
+
   {
-    "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
+    "mfussenegger/nvim-dap",
     dependencies = {
-      "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio",
-      "mxsdev/nvim-dap-vscode-js",
+      { "igorlfs/nvim-dap-view", opts = {} },
     },
     config = function()
       require "configs.daps.configs"
     end,
-  },
-  {
-    "mfussenegger/nvim-dap",
   },
   {
     "rmagatti/auto-session",
@@ -51,6 +42,11 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
+      "mxsdev/nvim-dap-vscode-js",
+      {
+        "microsoft/vscode-js-debug",
+        build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+      },
     },
     lazy = false,
     config = function()
@@ -64,6 +60,7 @@ return {
         "nvim-telescope/telescope-live-grep-args.nvim",
         version = "^1.0.0",
       },
+      "nvim-telescope/telescope-ui-select.nvim",
     },
     opts = require("configs.telescope_config").conf,
   },

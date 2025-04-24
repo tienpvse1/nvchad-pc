@@ -1,5 +1,10 @@
 local dap = require "dap"
 
+local function getCwd()
+  local cwd = vim.fn.input("Current Directory ", vim.fn.getcwd())
+  return cwd
+end
+
 dap.adapters["pwa-chrome"] = {
   type = "server",
   host = "localhost",
@@ -30,24 +35,37 @@ for _, language in ipairs { "typescript", "javascript" } do
   dap.configurations[language] = {
     {
       type = "pwa-node",
-      request = "attach",
-      name = "Attach",
-      processId = require("dap.utils").pick_process,
-      cwd = "${workspaceFolder}",
-      skilpFiles = { "<node_internals>/**" },
+      request = "launch",
+      name = "Launch JS app",
+      cwd = getCwd,
+      runtimeArgs = { "start" },
+      program = "${file}",
+      runtimeExecutable = "pnpm",
+      sourceMaps = true,
+      protocol = "inspector",
+      outFiles = { "${workspaceFolder}/**/*", "!**/node_modules/**" },
+      skipFiles = {
+        "<node_internals>/**/*.js",
+      },
+      resolveSourceMapLocations = {
+        "${workspaceFolder}/**",
+        "!**/node_modules/**",
+      },
     },
     {
       type = "pwa-node",
       request = "launch",
       name = "Launch NestJS app",
-      cwd = "${workspaceFolder}",
+      cwd = getCwd,
       runtimeArgs = { "start:debug" },
       program = "${file}",
       runtimeExecutable = "pnpm",
       sourceMaps = true,
       protocol = "inspector",
-      outFiles = { "${workspaceFolder}/**/**/*", "!**/node_modules/**" },
-      skilpFiles = { "<node_internals>/**" },
+      outFiles = { "${workspaceFolder}/**/*", "!**/node_modules/**" },
+      skipFiles = {
+        "<node_internals>/**/*.js",
+      },
       resolveSourceMapLocations = {
         "${workspaceFolder}/**",
         "!**/node_modules/**",
@@ -63,7 +81,9 @@ for _, language in ipairs { "typescript", "javascript" } do
       protocol = "inspector",
       console = "integratedTerminal",
       sourceMaps = true,
-      skilpFiles = { "<node_internals>/**" },
+      skipFiles = {
+        "<node_internals>/**/*.js",
+      },
     },
   }
 end
@@ -94,7 +114,9 @@ for _, lang in ipairs { "javascriptreact", "typescriptreact", "svelte" } do
       url = getUrl,
       webRoot = "${workspaceFolder}",
       cwd = "${workspaceFolder}",
-      skilpFiles = { "<node_internals>/**" },
+      skipFiles = {
+        "<node_internals>/**/*.js",
+      },
       sourceMaps = true,
       ["debug.javascript.terminalOptions"] = {
         ["skipFiles"] = { "<node_internals>/**" },

@@ -14,6 +14,7 @@ local servers = {
   "docker_compose_language_service",
   "dockerls",
   "svelte",
+  "eslint",
 }
 
 -- lsps with default config
@@ -88,6 +89,28 @@ require("lspconfig").jsonls.setup {
             "stylelint.config.json",
           },
           url = "http://json.schemastore.org/stylelintrc.json",
+        },
+        {
+          url = "https://raw.githubusercontent.com/Yash-Singh1/vscode-snippets-json-schema/main/schema.json",
+          fileMatch = {
+            "typescript.json",
+            "javascript.json",
+            "typescriptreact.json",
+            "javascriptreact.json",
+            "lua.json",
+            "svelte.json",
+            "html.json",
+            "go.json",
+            "java.json",
+            "kotlin.json",
+            "htmx.json",
+          },
+        },
+        {
+          url = "https://json.schemastore.org/luaurc.json",
+          fileMatch = {
+            ".luarc.json",
+          },
         },
       },
     },

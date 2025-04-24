@@ -3,6 +3,23 @@ local cmp = require "cmp"
 
 local map = vim.keymap.set
 
+-- dapview.nvim
+map("n", "<F1>", function()
+  require("dap-view").jump "watches"
+end, { desc = "Dapview focus watches" })
+
+map("n", "<F2>", function()
+  require("dap-view").jump "scopes"
+end, { desc = "Dapview focus scopes" })
+
+map("n", "<F3>", function()
+  require("dap-view").jump "exceptions"
+end, { desc = "Dapview focus exceptions" })
+
+map("n", "<F4>", function()
+  require("dap-view").jump "breakpoints"
+end, { desc = "Dapview focus breakpoints" })
+
 -- window resizing
 map("n", "<C-Up>", ":resize +2<CR>", { desc = "increase height" })
 map("n", "<C-Down>", ":resize -2<CR>", { desc = "decrease height" })
@@ -35,7 +52,11 @@ end, {
 })
 
 -- nvim-dap
-map("n", "<leader>db", require("dap").toggle_breakpoint, { desc = "Add breakpoint at line" })
+map("n", "<leader>db", function()
+  local condition = vim.fn.input("Breakpoint condition ", "true")
+  require("dap").toggle_breakpoint(condition)
+end, { desc = "Add breakpoint at line" })
+map("n", "<F8>", require("dap").toggle_breakpoint, { desc = "Add breakpoint at line" })
 map("n", "<F5>", require("dap").continue, {
   desc = "Run or continue the debugger",
 })
@@ -46,7 +67,7 @@ map("n", "<F11>", require("dap").step_into, {
   desc = "Dap Step Into",
 })
 map("n", "<S-F11>", require("dap").step_out, {
-  desc = "Run or continue the debugger",
+  desc = "Dap Step out",
 })
 map("n", "<S-F5>", function()
   require("dap").terminate { all = "true" }

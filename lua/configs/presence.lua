@@ -3,7 +3,7 @@ local M = {}
 M.config = {
   auto_update = true,
   neovim_image_text = "The Gigachad Text Editor🗿",
-  main_image = "file",
+  main_image = "neovim",
   enable_line_number = true,
   blacklist = {},
   buttons = true,
@@ -11,7 +11,7 @@ M.config = {
   show_time = false,
 
   log_level = nil, -- Log messages at or above this level (one of the following: "debug", "info", "warn", "error")
-  -- Rich Presence text options
+
   editing_text = function(filename)
     if string.find(filename, ".lua") then
       return "🛠 Đang config Neovim"
@@ -21,7 +21,7 @@ M.config = {
   end,
   file_explorer_text = "🔭 Soi project bằng Telescope",
   git_commit_text = "Đang push code 💣",
-  plugin_manager_text = "Managing plugins",
+  plugin_manager_text = "Cài plugin",
   reading_text = function(filename)
     if string.find(filename, "zsh") then
       return "💥Cày nát terminal"
