@@ -116,3 +116,17 @@ require("lspconfig").jsonls.setup {
     },
   },
 }
+
+local M = {}
+
+M.dependencies = {
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim",
+    },
+    opts = { lsp = { auto_attach = true } },
+  },
+}
+return M

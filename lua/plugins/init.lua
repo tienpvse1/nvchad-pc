@@ -77,6 +77,7 @@ return {
       "nvim-telescope/telescope.nvim",
     },
     opts = {
+      graph_style = "kitty",
       mappings = require("configs.neogit_config").mappings,
       use_default_keymaps = require("configs.neogit_config").use_default_keymaps,
     },
@@ -150,28 +151,10 @@ return {
 
   {
     "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup {
-        event = "BufReadPre",
-        opts = {
-          enable_close = true, -- Auto close tags
-          enable_rename = true, -- Auto rename pairs of tags
-          enable_close_on_slash = true, -- Auto close on trailing </
-        },
-      }
-    end,
+    config = require("configs.autotag_config").conf,
   },
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      {
-        "SmiteshP/nvim-navbuddy",
-        dependencies = {
-          "SmiteshP/nvim-navic",
-          "MunifTanjim/nui.nvim",
-        },
-        opts = { lsp = { auto_attach = true } },
-      },
-    },
+    dependencies = require("configs.lspconfig").dependencies,
   },
 }
