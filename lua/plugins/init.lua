@@ -20,7 +20,10 @@ return {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      { "igorlfs/nvim-dap-view", opts = {} },
+      "igorlfs/nvim-dap-view",
+      "theHamsta/nvim-dap-virtual-text",
+      "mxsdev/nvim-dap-vscode-js",
+      "microsoft/vscode-js-debug",
     },
     config = function()
       require "configs.daps.configs"
@@ -42,11 +45,6 @@ return {
     "nvim-treesitter/nvim-treesitter-textobjects",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "mxsdev/nvim-dap-vscode-js",
-      {
-        "microsoft/vscode-js-debug",
-        build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
-      },
     },
     lazy = false,
     config = function()

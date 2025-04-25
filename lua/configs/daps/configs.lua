@@ -1,5 +1,7 @@
 local dap = require "dap"
 local dv = require "dap-view"
+require("nvim-dap-virtual-text").setup()
+
 dap.listeners.before.attach["dap-view-config"] = dv.open
 dap.listeners.before.launch["dap-view-config"] = dv.open
 
