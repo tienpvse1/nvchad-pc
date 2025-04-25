@@ -135,21 +135,6 @@ map("n", "<leader>fc", function()
   }
 end)
 
-map({ "n", "t" }, "<A-i>", function()
-  require("nvchad.term").toggle {
-    pos = "float",
-    id = "floatTerm",
-    size = 0.8,
-    float_opts = {
-      relative = "editor",
-      row = 0.05,
-      col = 0.05,
-      width = 0.9,
-      height = 0.8,
-    },
-  }
-end, { desc = "Terminal Toggle Floating term" })
-
 map("n", "<leader><leader>m", require("treesj").toggle, { desc = "Toggle split/join" })
 map("n", "<leader>fm", function()
   if vim.bo.filetype == "rust" then
