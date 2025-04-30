@@ -1,5 +1,11 @@
 return {
   {
+    "nvimtools/none-ls.nvim",
+    config = function()
+      require "configs.nonels_config"
+    end,
+  },
+  {
     "nvim-tree/nvim-web-devicons",
     opts = require("configs.devicons").conf,
   },
@@ -85,29 +91,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require("typescript-tools").setup {}
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
     end,
-    dependencies = {
-      {
-        "pmizio/typescript-tools.nvim",
-        dependencies = "nvim-lua/plenary.nvim",
-
-        opts = {
-          settings = {
-            tsserver_file_preferences = {
-              includeInlayParameterNameHints = "all",
-              includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayVariableTypeHints = true,
-              includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-              includeInlayFunctionLikeReturnTypeHints = true,
-            },
-          },
-        },
-      },
-    },
   },
   {
     "hrsh7th/nvim-cmp",

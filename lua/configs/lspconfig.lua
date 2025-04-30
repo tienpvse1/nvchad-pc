@@ -13,7 +13,7 @@ local servers = {
   "tailwindcss",
   "docker_compose_language_service",
   "dockerls",
-  "svelte",
+  "ts_ls",
   "eslint",
 }
 
@@ -25,6 +25,18 @@ for _, lsp in ipairs(servers) do
     capabilities = capabilities,
   }
 end
+
+local svelte_capability = vim.tbl_deep_extend("force", capabilities, {
+  workspace = {
+    didChangeWatchedFiles = false,
+  },
+})
+
+lspconfig.svelte.setup {
+  on_attach = on_attach,
+  on_init = on_init,
+  capabilities = svelte_capability,
+}
 
 require("lspconfig").yamlls.setup {
   on_init = on_init,

@@ -3,6 +3,8 @@ local cmp = require "cmp"
 
 local map = vim.keymap.set
 
+-- common stuff
+
 -- dapview.nvim
 map("n", "<F1>", function()
   require("dap-view").jump_to_view "watches"
@@ -29,6 +31,14 @@ map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Window increase width
 -- gitsigns
 map("n", "<leader>gb", require("gitsigns").toggle_current_line_blame, { desc = "Git Toggle blame line" })
 map("n", "<leader>gB", require("gitsigns").blame, { desc = "Git Open Blame" })
+
+-- LSP code actions
+map(
+  "n",
+  "<space>ca",
+  vim.lsp.buf.code_action,
+  { desc = "LSP Code actions", noremap = true, silent = true, buffer = vim.api.nvim_get_current_buf() }
+)
 
 -- git diff
 
@@ -105,8 +115,6 @@ end, {
 })
 
 -- normal mode
-map({ "n", "i" }, "<S-A-o>", "<ESC><cmd>TSToolsOrganizeImports<CR>")
-map({ "n", "i" }, "<S-A-r>", "<ESC><cmd>TSToolsRemoveUnused<CR>")
 map("n", "<leader>i", vim.diagnostic.open_float)
 
 -- telescope
