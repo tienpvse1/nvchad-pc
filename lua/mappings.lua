@@ -167,3 +167,9 @@ map("n", "<leader>ds", function()
   local dropdown_theme = require("telescope.themes").get_dropdown {}
   require("components.session").delete_session(dropdown_theme)
 end, { desc = "Testing Delete session" })
+
+-- quickfix
+map("n", "<leader>cn", "<cmd>cnext<CR>", { desc = "Quickfix Next item" })
+map("n", "<leader>cp", "<cmd>cprevious<CR>", { desc = "Quickfix Previous item" })
+map("n", "<leader>co", "<cmd>copen<CR>", { desc = "Quickfix Open" })
+map("n", "<leader>cc", "<cmd>cclose<CR>", { desc = "Quickfix Close" })
