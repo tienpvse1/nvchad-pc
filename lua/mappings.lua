@@ -42,37 +42,38 @@ map(
   { desc = "LSP Code actions", noremap = true, silent = true, buffer = vim.api.nvim_get_current_buf() }
 )
 
--- git diff
-
 -- neogit
---
-map("n", "<leader>Gg", function()
+map("n", "<leader>gg", function()
   require("neogit").open { kind = "floating" }
 end, { desc = "Git open" })
 
 map("n", "<leader>Gd", function()
-  require("neogit").open { "diff", kind = "floating" }
-end, { desc = "Git open diffview" })
+  if next(require("diffview.lib").views) == nil then
+    vim.cmd("DiffviewOpen", {})
+  else
+    vim.cmd("DiffviewClose", {})
+  end
+end, { desc = "Git Toggle diffview" })
 
-map("n", "<leader>Gc", function()
+map("n", "<leader>gc", function()
   require("neogit").open { "commit", kind = "floating" }
 end, { desc = "Git open commit" })
 
-map("n", "<leader>Gc", function()
-  require("neogit").open { "commit", kind = "floating" }
-end, { desc = "Git open commit" })
-
-map("n", "<leader>Gp", function()
+map("n", "<leader>gp", function()
   require("neogit").open { "pull", kind = "floating" }
 end, { desc = "Git pull" })
 
-map("n", "<leader>GP", function()
+map("n", "<leader>gP", function()
   require("neogit").open { "push", kind = "floating" }
 end, { desc = "Git push" })
 
-map("n", "<leader>Gw", function()
+map("n", "<leader>gw", function()
   require("neogit").open { "worktree", kind = "floating" }
 end, { desc = "Git worktree" })
+
+map("n", "<leader>gl", function()
+  require("neogit").open { "log", kind = "floating" }
+end, { desc = "Git Show log" })
 
 -- nvim-spectre
 map("n", "<leader>st", require("spectre").toggle, {
@@ -120,10 +121,11 @@ end, {
   desc = "DAP Terminate session",
 })
 
--- normal mode
-map("n", "<S-i>", vim.diagnostic.open_float, { desc = "Diag Open floating window" })
+-- Common stuffs
+map("n", "<S-i>", vim.diagnostic.open_float, { desc = "Editor  Open diagnostic floating window" })
+map("n", "<C-s>", ":w<CR>", { desc = "Editor Save file" })
 
--- telescope
+-- Telescope
 map(
   "n",
   "<leader>gr",
@@ -162,9 +164,6 @@ end)
 map("i", "<C-o>", cmp.mapping.complete)
 
 map("i", "jj", "<ESC>")
-
--- special config for neovide
-map("n", "<C-s>", ":w<CR>") -- Save
 
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })

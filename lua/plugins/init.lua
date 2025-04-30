@@ -16,13 +16,11 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {},
   },
   { "nvim-pack/nvim-spectre" },
   {
     "nvzone/typr",
     dependencies = "nvzone/volt",
-    opts = {},
     cmd = { "Typr", "TyprStats" },
   },
 

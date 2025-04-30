@@ -39,3 +39,7 @@ vim.fn.sign_define("DapStopped", {
   linehl = "DapStopped",
   numhl = "DapStopped",
 })
+
+-- Diffview colour
+vim.api.nvim_set_hl(0, "DiffChange", { fg = "#FFB86C", ctermbg = sign_column_ctermbg, bg = sign_column_bg })
+vim.api.nvim_set_hl(0, "DiffChanged", { fg = "#FFB86C", bold = true })
