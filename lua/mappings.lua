@@ -124,6 +124,7 @@ end, {
 -- Common stuffs
 map("n", "<S-i>", vim.diagnostic.open_float, { desc = "Editor  Open diagnostic floating window" })
 map("n", "<C-s>", ":w<CR>", { desc = "Editor Save file" })
+map("i", "jj", "<ESC>", { desc = "Editor Escape insert mode" })
 
 -- Telescope
 map(
@@ -161,11 +162,8 @@ map("n", "<leader>fm", function()
 end)
 
 -- nvim-cmp
-map("i", "<C-o>", cmp.mapping.complete)
+map("i", "<C-o>", cmp.mapping.complete, {
+  desc = "LSP Trigger auto complete",
+})
 
-map("i", "jj", "<ESC>")
-
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+map("n", "<leader>ds", require("components.confirmation").displayMenu, { desc = "Testing Delete session" })
