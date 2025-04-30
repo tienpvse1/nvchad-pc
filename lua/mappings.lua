@@ -3,24 +3,26 @@ local cmp = require "cmp"
 
 local map = vim.keymap.set
 
--- common stuff
+-- navbuddy
+map("n", "<leader>nb", function()
+  require("nvim-navbuddy").open(vim.api.nvim_get_current_buf())
+end, { desc = "NavBuddy open" })
 
--- dapview.nvim
-map("n", "<F1>", function()
-  require("dap-view").jump_to_view "watches"
-end, { desc = "Dapview focus watches" })
+-- neotest
+map("n", "<leader>tr", require("neotest").run.run, { desc = "Neotest Run test" })
+map("n", "<leader>tos", require("neotest").summary.toggle, { desc = "Neotest Open summary panel" })
 
-map("n", "<F2>", function()
-  require("dap-view").jump_to_view "scopes"
-end, { desc = "Dapview focus scopes" })
+map("n", "<leader>top", function()
+  require("neotest").output.toggle { enter = true, auto_close = true }
+end, { desc = "Neotest Open output panel" })
 
-map("n", "<F3>", function()
-  require("dap-view").jump_to_view "exceptions"
-end, { desc = "Dapview focus exceptions" })
+map("n", "<leader>twr", function()
+  require("neotest").run.run { vitestCommand = "vitest --watch" }
+end, { desc = "Neotest Run Watch" })
 
-map("n", "<F4>", function()
-  require("dap-view").jump_to_view "breakpoints"
-end, { desc = "Dapview focus breakpoints" })
+map("n", "<leader>twf", function()
+  require("neotest").run.run { vim.fn.expand "%", vitestCommand = "vitest --watch" }
+end, { desc = "Neotest Watch File" })
 
 -- window resizing
 map("n", "<C-Up>", ":resize +2<CR>", { desc = "Window increase height" })
@@ -90,32 +92,36 @@ end, {
   desc = "Spectre Search on current file",
 })
 
+-- dapui
+map("n", "<leader>dt", require("dapui").toggle, { desc = "DAP Toggle UI" })
+map("n", "<leader>de", require("dapui").eval, { desc = "DAP Evaluate variable" })
+
 -- nvim-dap
 map("n", "<leader>db", function()
   local condition = vim.fn.input("Breakpoint condition ", "true")
   require("dap").toggle_breakpoint(condition)
-end, { desc = "DAP add breakpoint at line" })
+end, { desc = "DAP Add breakpoint at line" })
 map("n", "<F8>", require("dap").toggle_breakpoint, { desc = "DAP add conditional breakpoint at line" })
 map("n", "<F5>", require("dap").continue, {
-  desc = "DAP run or continue the debugger",
+  desc = "DAP Run or continue the debugger",
 })
 map("n", "<F10>", require("dap").step_over, {
-  desc = "DAP step Over",
+  desc = "DAP Step Over",
 })
 map("n", "<F11>", require("dap").step_into, {
-  desc = "DAP step Into",
+  desc = "DAP Step Into",
 })
 map("n", "<S-F11>", require("dap").step_out, {
-  desc = "DAP step out",
+  desc = "DAP Step out",
 })
 map("n", "<S-F5>", function()
   require("dap").terminate { all = "true" }
 end, {
-  desc = "DAP terminate session",
+  desc = "DAP Terminate session",
 })
 
 -- normal mode
-map("n", "<leader>i", vim.diagnostic.open_float)
+map("n", "<S-i>", vim.diagnostic.open_float, { desc = "Diag Open floating window" })
 
 -- telescope
 map(

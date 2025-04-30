@@ -1,11 +1,23 @@
 local M = {}
 
-M.mappings = {
+local mappings = {
   status = {
     ["a"] = "Stage",
   },
 }
 
-M.use_default_keymaps = true
+
+M.dependencies = {
+  "nvim-lua/plenary.nvim",
+  "sindrets/diffview.nvim",
+  "nvim-telescope/telescope.nvim",
+}
+
+M.opts = {
+
+  graph_style = "kitty",
+  mappings = mappings,
+  use_default_keymaps = true,
+}
 
 return M

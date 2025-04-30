@@ -1,9 +1,15 @@
 return {
   {
-    "nvimtools/none-ls.nvim",
+    "rcarriga/nvim-dap-ui",
+    dependencies = require("configs.dapui_config").dependencies,
     config = function()
-      require "configs.nonels_config"
+      require("dapui").setup(require("configs.dapui_config").opts)
     end,
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = require("configs.neotest_config").dependencies,
+    config = require("configs.neotest_config").config,
   },
   {
     "nvim-tree/nvim-web-devicons",
@@ -24,12 +30,7 @@ return {
 
   {
     "mfussenegger/nvim-dap",
-    dependencies = {
-      "igorlfs/nvim-dap-view",
-      "theHamsta/nvim-dap-virtual-text",
-      "mxsdev/nvim-dap-vscode-js",
-      "microsoft/vscode-js-debug",
-    },
+    dependencies = require("configs.daps").dependencies,
     config = function()
       require "configs.daps.configs"
     end,
@@ -48,9 +49,7 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     lazy = false,
     config = function()
       require "configs.text-object"
@@ -58,13 +57,7 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = {
-      {
-        "nvim-telescope/telescope-live-grep-args.nvim",
-        version = "^1.0.0",
-      },
-      "nvim-telescope/telescope-ui-select.nvim",
-    },
+    dependencies = require("configs.telescope_config").dependencies,
     opts = require("configs.telescope_config").conf,
   },
   {
@@ -77,16 +70,8 @@ return {
   {
     "NeogitOrg/neogit",
     lazy = false,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    opts = {
-      graph_style = "kitty",
-      mappings = require("configs.neogit_config").mappings,
-      use_default_keymaps = require("configs.neogit_config").use_default_keymaps,
-    },
+    dependencies = require("configs.neogit_config").dependencies,
+    opts = require("configs.neogit_config").opts,
   },
   {
     "neovim/nvim-lspconfig",
@@ -118,17 +103,10 @@ return {
 
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "*",
     event = "VeryLazy",
     opts = {},
   },
-
-  {
-    "andweeb/presence.nvim",
-    event = "BufEnter",
-    opts = require("configs.presence").config,
-  },
-
   {
     "Wansmer/treesj",
     keys = { "<leader>m", "<leader>j", "<leader>s" },

@@ -24,5 +24,12 @@ local function telescope_conf(_, conf)
 end
 
 M.conf = telescope_conf
+M.dependencies = {
+  {
+    "nvim-telescope/telescope-live-grep-args.nvim",
+    version = "^1.0.0",
+  },
+  "nvim-telescope/telescope-ui-select.nvim",
+}
 
 return M
