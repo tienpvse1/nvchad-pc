@@ -10,6 +10,7 @@ end, { desc = "NavBuddy open" })
 
 -- neotest
 map("n", "<leader>tr", require("neotest").run.run, { desc = "Neotest Run test" })
+
 map("n", "<leader>tos", require("neotest").summary.toggle, { desc = "Neotest Open summary panel" })
 
 map("n", "<leader>top", function()
@@ -122,8 +123,9 @@ end, {
 })
 
 -- Common stuffs
-map("n", "<S-i>", vim.diagnostic.open_float, { desc = "Editor  Open diagnostic floating window" })
+map("n", "<S-i>", vim.diagnostic.open_float, { desc = "Editor Open diagnostic floating window" })
 map("n", "<C-s>", ":w<CR>", { desc = "Editor Save file" })
+map("n", "<leader>fm", require("conform").format, { desc = "Editor Format document" })
 map("i", "jj", "<ESC>", { desc = "Editor Escape insert mode" })
 
 -- Telescope
@@ -133,12 +135,14 @@ map(
   require("telescope.builtin").lsp_references,
   { desc = "Telescope go to references", noremap = true, silent = true }
 )
+
 map(
   "n",
   "<leader>gd",
   require("telescope.builtin").lsp_definitions,
   { desc = "Telescope go to definitions", noremap = true, silent = true }
 )
+
 map(
   "n",
   "<leader>fw",
@@ -150,20 +154,16 @@ map("n", "<leader>fc", function()
   require("telescope.builtin").find_files {
     cwd = vim.fn.stdpath "config",
   }
-end)
+end, { desc = "Telescope Search in config repo" })
 
 map("n", "<leader><leader>m", require("treesj").toggle, { desc = "Toggle split/join" })
-map("n", "<leader>fm", function()
-  if vim.bo.filetype == "rust" then
-    vim.lsp.buf.format()
-  else
-    require("conform").format()
-  end
-end)
 
 -- nvim-cmp
 map("i", "<C-o>", cmp.mapping.complete, {
   desc = "LSP Trigger auto complete",
 })
 
-map("n", "<leader>ds", require("components.confirmation").displayMenu, { desc = "Testing Delete session" })
+map("n", "<leader>ds", function()
+  local dropdown_theme = require("telescope.themes").get_dropdown {}
+  require("components.session").delete_session(dropdown_theme)
+end, { desc = "Testing Delete session" })
