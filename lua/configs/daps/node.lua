@@ -1,8 +1,8 @@
 local dap = require "dap"
 
-local function getCwd()
-  local cwd = vim.fn.input("Current Directory ", vim.fn.getcwd())
-  return cwd
+local function getLaunchCmd()
+  local cmd = vim.fn.input("npm script", "dev")
+  return { cmd }
 end
 
 dap.adapters["pwa-chrome"] = {
@@ -36,9 +36,9 @@ for _, language in ipairs { "typescript", "javascript" } do
     {
       type = "pwa-node",
       request = "launch",
-      name = "Launch JS app",
-      cwd = getCwd,
-      runtimeArgs = { "start" },
+      name = "Launch with command",
+      cwd = "${workspaceFolder}",
+      runtimeArgs = getLaunchCmd,
       program = "${file}",
       runtimeExecutable = "pnpm",
       sourceMaps = true,
@@ -56,7 +56,7 @@ for _, language in ipairs { "typescript", "javascript" } do
       type = "pwa-node",
       request = "launch",
       name = "Launch NestJS app",
-      cwd = getCwd,
+      cwd = "${workspaceFolder}",
       runtimeArgs = { "start:debug" },
       program = "${file}",
       runtimeExecutable = "pnpm",
@@ -70,20 +70,6 @@ for _, language in ipairs { "typescript", "javascript" } do
       resolveSourceMapLocations = {
         "${workspaceFolder}/**",
         "!**/node_modules/**",
-      },
-    },
-    {
-      type = "pwa-node",
-      request = "launch",
-      name = "Launch Svelte server",
-      cwd = "${workspaceFolder}",
-      runtimeArgs = { "dev" },
-      runtimeExecutable = "pnpm",
-      protocol = "inspector",
-      console = "integratedTerminal",
-      sourceMaps = true,
-      skipFiles = {
-        "<node_internals>/**/*.js",
       },
     },
   }
@@ -119,9 +105,6 @@ for _, lang in ipairs { "javascriptreact", "typescriptreact", "svelte" } do
         "<node_internals>/**/*.js",
       },
       sourceMaps = true,
-      ["debug.javascript.terminalOptions"] = {
-        ["skipFiles"] = { "<node_internals>/**" },
-      },
     },
   }
 end

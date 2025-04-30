@@ -2,9 +2,7 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = require("configs.dapui_config").dependencies,
-    config = function()
-      require("dapui").setup(require("configs.dapui_config").opts)
-    end,
+    config = require("configs.dapui_config").config,
   },
   {
     "nvim-neotest/neotest",
