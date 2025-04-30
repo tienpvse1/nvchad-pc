@@ -1,5 +1,10 @@
 return {
   {
+    "mistricky/codesnap.nvim",
+    build = "make",
+    config = require("configs.codesnap_config").config,
+  },
+  {
     "rcarriga/nvim-dap-ui",
     dependencies = require("configs.dapui_config").dependencies,
     config = require("configs.dapui_config").config,
