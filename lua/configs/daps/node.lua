@@ -42,6 +42,7 @@ for _, language in ipairs { "typescript", "javascript" } do
       program = "${file}",
       runtimeExecutable = "pnpm",
       sourceMaps = true,
+      console = "integratedTerminal",
       protocol = "inspector",
       outFiles = { "${workspaceFolder}/**/*", "!**/node_modules/**" },
       skipFiles = {
@@ -70,6 +71,21 @@ for _, language in ipairs { "typescript", "javascript" } do
       resolveSourceMapLocations = {
         "${workspaceFolder}/**",
         "!**/node_modules/**",
+      },
+    },
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch Svelte server \n",
+      cwd = "${workspaceFolder}",
+      runtimeArgs = { "dev" },
+      runtimeExecutable = "pnpm",
+      protocol = "inspector",
+      console = "integratedTerminal",
+      sourceMaps = true,
+      skilpFiles = { "<node_internals>/**" },
+      skipFiles = {
+        "<node_internals>/**/*.js",
       },
     },
   }
