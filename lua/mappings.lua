@@ -9,9 +9,13 @@ map("n", "<leader>nb", function()
 end, { desc = "NavBuddy open" })
 
 -- neotest
-map("n", "<leader>tr", require("neotest").run.run, { desc = "Neotest Run test" })
+map("n", "<leader>tr", function()
+  require("neotest").run.run()
+end, { desc = "Neotest Run test" })
 
-map("n", "<leader>tos", require("neotest").summary.toggle, { desc = "Neotest Open summary panel" })
+map("n", "<leader>tos", function()
+  require("neotest").summary.toggle()
+end, { desc = "Neotest Open summary panel" })
 
 map("n", "<leader>top", function()
   require("neotest").output.toggle { enter = true, auto_close = true }
@@ -32,16 +36,17 @@ map("n", "<C-Left>", ":vertical resize -2<CR>", { desc = "Window increase width"
 map("n", "<C-Right>", ":vertical resize +2<CR>", { desc = "Window increase width" })
 
 -- gitsigns
-map("n", "<leader>gb", require("gitsigns").toggle_current_line_blame, { desc = "Git Toggle blame line" })
-map("n", "<leader>gB", require("gitsigns").blame, { desc = "Git Open Blame" })
+map("n", "<leader>gb", function()
+  require("gitsigns").toggle_current_line_blame()
+end, { desc = "Git Toggle blame line" })
+map("n", "<leader>gB", function()
+  require("gitsigns").blame()
+end, { desc = "Git Open Blame" })
 
 -- LSP code actions
-map(
-  "n",
-  "<space>ca",
-  vim.lsp.buf.code_action,
-  { desc = "LSP Code actions", noremap = true, silent = true, buffer = vim.api.nvim_get_current_buf() }
-)
+map("n", "<space>ca", function()
+  vim.lsp.buf.code_action()
+end, { desc = "LSP Code actions", noremap = true, silent = true, buffer = vim.api.nvim_get_current_buf() })
 
 -- neogit
 map("n", "<leader>gg", function()
@@ -77,7 +82,9 @@ map("n", "<leader>gl", function()
 end, { desc = "Git Show log" })
 
 -- nvim-spectre
-map("n", "<leader>st", require("spectre").toggle, {
+map("n", "<leader>st", function()
+  require("spectre").toggle()
+end, {
   desc = "Spectre totgle",
 })
 map("n", "<leader>sw", function()
@@ -85,7 +92,9 @@ map("n", "<leader>sw", function()
 end, {
   desc = "Spectre Search current word",
 })
-map("v", "<leader>sw", require("spectre").open_visual, {
+map("v", "<leader>sw", function()
+  require("spectre").open_visual()
+end, {
   desc = "Spectre current visualized",
 })
 map("n", "<leader>sp", function()
@@ -95,25 +104,39 @@ end, {
 })
 
 -- dapui
-map("n", "<leader>dt", require("dapui").toggle, { desc = "DAP Toggle UI" })
-map("n", "<leader>de", require("dapui").eval, { desc = "DAP Evaluate variable" })
+map("n", "<leader>dt", function()
+  require("dapui").toggle()
+end, { desc = "DAP Toggle UI" })
+map("n", "<leader>de", function()
+  require("dapui").eval()
+end, { desc = "DAP Evaluate variable" })
 
 -- nvim-dap
 map("n", "<leader>db", function()
   local condition = vim.fn.input("Breakpoint condition ", "true")
   require("dap").toggle_breakpoint(condition)
 end, { desc = "DAP Add breakpoint at line" })
-map("n", "<F8>", require("dap").toggle_breakpoint, { desc = "DAP add conditional breakpoint at line" })
-map("n", "<F5>", require("dap").continue, {
+map("n", "<F8>", function()
+  require("dap").toggle_breakpoint()
+end, { desc = "DAP add conditional breakpoint at line" })
+map("n", "<F5>", function()
+  require("dap").continue()
+end, {
   desc = "DAP Run or continue the debugger",
 })
-map("n", "<F10>", require("dap").step_over, {
+map("n", "<F10>", function()
+  require("dap").step_over()
+end, {
   desc = "DAP Step Over",
 })
-map("n", "<F11>", require("dap").step_into, {
+map("n", "<F11>", function()
+  require("dap").step_into()
+end, {
   desc = "DAP Step Into",
 })
-map("n", "<S-F11>", require("dap").step_out, {
+map("n", "<S-F11>", function()
+  require("dap").step_out()
+end, {
   desc = "DAP Step out",
 })
 map("n", "<S-F5>", function()
@@ -127,6 +150,10 @@ map("n", "<S-i>", vim.diagnostic.open_float, { desc = "Editor Open diagnostic fl
 map("n", "<C-s>", ":w<CR>", { desc = "Editor Save file" })
 map("n", "<leader>fm", require("conform").format, { desc = "Editor Format document" })
 map("i", "jj", "<ESC>", { desc = "Editor Escape insert mode" })
+map("n", "<leader>v", vim.cmd.vsplit, { desc = "Editor Split current pane vertically" })
+map("n", "<leader>nv", vim.cmd.vnew, { desc = "Editor Split new vertical pane" })
+map("n", "<leader>nh", vim.cmd.new, { desc = "Editor Split new horizontal pane" })
+map("n", "<leader>h", vim.cmd.split, { desc = "Editor Split current pane horizontally" })
 
 -- Telescope
 map(
@@ -171,5 +198,10 @@ end, { desc = "Testing Delete session" })
 -- quickfix
 map("n", "<A-j>", "<cmd>cnext<CR>", { desc = "Quickfix Next item" })
 map("n", "<A-k>", "<cmd>cprevious<CR>", { desc = "Quickfix Previous item" })
-map("n", "<leader>co", "<cmd>copen<CR>", { desc = "Quickfix Open" })
-map("n", "<leader>cc", "<cmd>cclose<CR>", { desc = "Quickfix Close" })
+map("n", "<leader>qo", "<cmd>copen<CR>", { desc = "Quickfix Open" })
+map("n", "<leader>qc", "<cmd>cclose<CR>", { desc = "Quickfix Close" })
+
+-- codesnap
+map("v", "<leader>cc", function()
+  require("codesnap").copy_into_clipboard(require("codesnap").copy_into_clipboard)
+end, { desc = "Editor Screenshot your code" })

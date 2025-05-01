@@ -5,8 +5,8 @@ M.dependencies = {
   "nvim-lua/plenary.nvim",
   "antoinemadec/FixCursorHold.nvim",
   "nvim-treesitter/nvim-treesitter",
-  "marilari88/neotest-vitest",
-  "thenbe/neotest-playwright",
+  { "marilari88/neotest-vitest", event = "VeryLazy", lazy = true },
+  { "thenbe/neotest-playwright", lazy = true },
 }
 
 M.config = function()
