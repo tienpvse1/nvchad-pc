@@ -8,7 +8,7 @@ map("n", "<leader>gs", function()
   require("neogit").open { "stash", kind = "floating" }
 end, { desc = "Git open" })
 
-map("n", "<leader>Gd", function()
+map("n", "<leader>gd", function()
   if next(require("diffview.lib").views) == nil then
     vim.cmd("DiffviewOpen", {})
   else
@@ -50,7 +50,7 @@ map("n", "<leader>gh", function()
   require("gitsigns").preview_hunk_inline()
 end, { desc = "Git Hunk inline" })
 
-map("n", "<leader>Gf", function()
+map("n", "<leader>gf", function()
   vim.cmd { cmd = "DiffviewFileHistory", args = { "%" } }
 end, { desc = "Git Hunk floating" })
 
