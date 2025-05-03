@@ -23,9 +23,9 @@ M.term = {
   },
 }
 
-M.nvdash = {
-  load_on_startup = true,
-}
+-- M.nvdash = {
+--   load_on_startup = false,
+-- }
 
 M.lsp = {
   signature = true,
@@ -45,9 +45,6 @@ M.ui = {
   },
 }
 
-M.nvdash = {
-  load_on_startup = true,
-}
 -- M.ui = {
 --       tabufline = {
 --          lazyload = false

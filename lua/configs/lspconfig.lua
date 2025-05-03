@@ -7,7 +7,7 @@ local lspconfig = require "lspconfig"
 local servers = {
   "html",
   "graphql",
-  "emmet_ls",
+  "emmet_language_server",
   "gopls",
   "cssls",
   "tailwindcss",

@@ -15,14 +15,13 @@ M.config = {
     "json-lsp",
     "js-debug-adapter",
     "graphql-language-service-cli",
-    "emmet-ls",
+    "emmet-language-server",
 
     -- golang
     -- "gopls",
     -- "gotests",
     -- "goimports",
     -- "gomodifytags",
-
   },
 }
 
