@@ -9,18 +9,8 @@ map("n", "<leader>gs", function()
 end, { desc = "Git open" })
 
 map("n", "<leader>gd", function()
-  if next(require("diffview.lib").views) == nil then
-    vim.cmd("DiffviewOpen", {})
-  else
-    vim.cmd("DiffviewClose", {})
-  end
+  vim.cmd("DiffviewOpen", {})
 end, { desc = "Git Toggle diffview" })
-
-map("n", "<leader>gc", function()
-  if next(require("diffview.lib").views) ~= nil then
-    vim.cmd("DiffviewClose", {})
-  end
-end, { desc = "Close diffview" })
 
 map("n", "<leader>gp", function()
   require("neogit").open { "pull", kind = "floating" }
