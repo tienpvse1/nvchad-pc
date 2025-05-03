@@ -17,8 +17,10 @@ map("n", "<leader>Gd", function()
 end, { desc = "Git Toggle diffview" })
 
 map("n", "<leader>gc", function()
-  require("neogit").open { "commit", kind = "floating" }
-end, { desc = "Git open commit" })
+  if next(require("diffview.lib").views) ~= nil then
+    vim.cmd("DiffviewClose", {})
+  end
+end, { desc = "Close diffview" })
 
 map("n", "<leader>gp", function()
   require("neogit").open { "pull", kind = "floating" }
@@ -48,8 +50,8 @@ map("n", "<leader>gh", function()
   require("gitsigns").preview_hunk_inline()
 end, { desc = "Git Hunk inline" })
 
-map("n", "<leader>gfh", function()
-  require("gitsigns").preview_hunk()
+map("n", "<leader>Gf", function()
+  vim.cmd { cmd = "DiffviewFileHistory", args = { "%" } }
 end, { desc = "Git Hunk floating" })
 
 map("n", "<leader>gq", function()
