@@ -14,9 +14,16 @@ map("n", "<C-s>", function()
   vim.api.nvim_command "write"
 end, { desc = "Editor Save file" })
 
+map("i", "<C-s>", function()
+  vim.api.nvim_command "write"
+  vim.api.nvim_input "<ESC>"
+end, { desc = "Editor Save file in input mode" })
+
 map("n", "<leader>fm", require("conform").format, { desc = "Editor Format document" })
 
-map("i", "jj", "<ESC>", { desc = "Editor Escape insert mode" })
+map("i", "jj", function()
+  vim.api.nvim_input "<ESC>"
+end, { desc = "Editor Escape insert mode" })
 
 map("n", "<leader>v", vim.cmd.vsplit, { desc = "Editor Split current pane vertically" })
 

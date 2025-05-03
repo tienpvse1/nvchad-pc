@@ -16,7 +16,6 @@ M.dependencies = {
 }
 
 M.opts = {
-
   graph_style = "kitty",
   mappings = mappings,
   use_default_keymaps = true,
